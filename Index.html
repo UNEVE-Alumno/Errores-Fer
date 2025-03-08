@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Errores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #01579b;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border: 3px solid #0277bd;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 50px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            color: #01579b;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 90%;
+            border: 2px solid #0288d1;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <img src="logo_uneve.png" alt="Logo UNEVE" width="100">
+    <h1>Universidad Estatal del Valle de Ecatepec</h1>
+    <h2>Ingeniería en Comunicación Multimedia</h2>
+
+    <div class="container">
+        <h2>Calculadora de Errores</h2>
+        <label for="valorReal">Valor Verdadero:</label>
+        <input type="number" id="valorReal" placeholder="Ingrese el valor verdadero">
+
+        <label for="valorAprox">Valor Aproximado:</label>
+        <input type="number" id="valorAprox" placeholder="Ingrese el valor aproximado">
+
+        <button onclick="calcularErrores()">Calcular Errores</button>
+
+        <div class="result" id="resultados"></div>
+    </div>
+
+    <h3>Integrantes:</h3>
+    <p>
+        Trinidad Lopez Alan Fernando<br>
+        Muñoz Valencia Yael<br>
+        Villanueva Sánchez Viridiana<br>
+        Gonzalez de la Cruz Edna Gisell
+    </p>
+
+    <script>
+        function calcularErrores() {
+            const valorReal = parseFloat(document.getElementById('valorReal').value);
+            const valorAprox = parseFloat(document.getElementById('valorAprox').value);
+
+            if (isNaN(valorReal) || isNaN(valorAprox)) {
+                document.getElementById('resultados').innerHTML = "Por favor, ingrese valores válidos.";
+                return;
+            }
+
+            const errorAbsoluto = Math.abs(valorReal - valorAprox);
+            const errorRelativo = errorAbsoluto / Math.abs(valorReal);
+            const errorPorcentual = errorRelativo * 100;
+
+            document.getElementById('resultados').innerHTML = `
+                Error Absoluto: ${errorAbsoluto.toFixed(4)}<br>
+                Error Relativo: ${errorRelativo.toFixed(4)}<br>
+                Error Porcentual: ${errorPorcentual.toFixed(2)}%
+            `;
+        }
+    </script>
+</body>
+</html>
